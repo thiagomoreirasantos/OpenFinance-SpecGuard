@@ -5,7 +5,7 @@ info:
   description: >
     API to retrieve stock market quotes. Provides real-time
     stock prices, currency exchange rates, and more.
-  version: 1.0.0
+  version: #1.0.0
   contact:
     name: API Support
     url: https://www.example.com/support

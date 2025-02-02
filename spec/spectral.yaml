@@ -1,0 +1,43 @@
+extends: ["spectral:oas"]
+
+rules:
+  info-title:
+    description: "The API must have a title"
+    severity: "error"
+    given: "$.info"
+    then:
+      field: "title"
+      function: truthy
+
+  info-version:
+    description: "The API must have a version"
+    severity: "error"
+    given: "$.info"
+    then:
+      field: "version"
+      function: truthy
+
+  required-parameters:
+    description: "All parameters must be required"
+    severity: "error"
+    given: "$.paths[*][*].parameters[*]"
+    then:
+      field: "required"
+      function: truthy
+
+  no-nullable-fields:
+    description: "No fields should allow null values"
+    severity: "warn"
+    given: "$.paths[*][*].responses[*].content.application/json.schema.properties[*]"
+    then:
+      field: "nullable"
+      function: falsy 
+
+  email-format:
+    description: "Email fields must have a valid format"
+    severity: "error"
+    given: "$..[?(@.format=='email')]"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"

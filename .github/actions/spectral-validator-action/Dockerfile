@@ -1,17 +1,17 @@
-# Usa uma imagem leve do Node.js
+# Uses a lightweight Node.js image
 FROM node:18-alpine
 
-# Define diretório de trabalho
+# Sets the working directory
 WORKDIR /app
 
-# Instala o Spectral CLI globalmente
+# Installs the Spectral CLI globally
 RUN npm install -g @stoplight/spectral-cli
 
-# Copia os arquivos necessários para dentro do container
+# Copies the necessary files into the container
 COPY entrypoint.sh /entrypoint.sh
 
-# Permite execução do script
+# Grants execution permission to the script
 RUN chmod +x /entrypoint.sh
 
-# Define o ponto de entrada da Action
+# Sets the entry point of the Action
 ENTRYPOINT ["/entrypoint.sh"]

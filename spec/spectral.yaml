@@ -1,3 +1,4 @@
+---
 extends: ["spectral:oas"]
 
 rules:
@@ -18,7 +19,9 @@ rules:
       function: truthy
 
   required-parameters:
-    description: "All parameters must be required"
+    description: >
+      All parameters must be required. This ensures that
+      every parameter explicitly states whether it is required.
     severity: "error"
     given: "$.paths[*][*].parameters[*]"
     then:
@@ -26,18 +29,21 @@ rules:
       function: truthy
 
   no-nullable-fields:
-    description: "No fields should allow null values"
+    description: >
+      No fields should allow null values. This rule prevents
+      nullable fields to ensure data consistency.
     severity: "warn"
     given: "$.paths[*][*].responses[*].content.application/json.schema.properties[*]"
     then:
       field: "nullable"
-      function: falsy 
+      function: falsy
 
-  email-format:
-    description: "Email fields must have a valid format"
+  max-length-fields:
+    description: >
+      All string fields must have a maxLength defined to
+      prevent excessively long inputs.
     severity: "error"
-    given: "$..[?(@.format=='email')]"
+    given: "$.paths[*][*].responses[*].content.application/json.schema.properties[*]"
     then:
-      function: pattern
-      functionOptions:
-        match: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+      field: "maxLength"
+      function: truthy

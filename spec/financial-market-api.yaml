@@ -1,7 +1,10 @@
+---
 openapi: 3.0.0
 info:
   title: Financial Market API
-  description: API to retrieve stock market quotes
+  description: >
+    API to retrieve stock market quotes. Provides real-time
+    stock prices, currency exchange rates, and more.
   version: 1.0.0
   contact:
     name: API Support
@@ -9,7 +12,7 @@ info:
     email: support@example.com
 
 tags:
-  - name: Stock Quotes
+  - name: Quotes
     description: Operations related to stock quotes
 
 servers:
@@ -22,15 +25,18 @@ paths:
   /quotes:
     get:
       summary: Returns stock quotes
-      description: Retrieves the current price of a specific stock
+      description: >
+        Retrieves the current price of a specific stock.
+        You must provide the stock symbol (e.g., AAPL, TSLA).
       operationId: getStockQuotes
       tags:
-        - Stock Quotes
+        - Quotes
       parameters:
         - name: symbol
           in: query
           required: true
-          description: Stock symbol (e.g., AAPL, TSLA)
+          description: >
+            Stock symbol (e.g., AAPL, TSLA). Must be between 3 and 5 characters.
           schema:
             type: string
             minLength: 3
@@ -47,15 +53,17 @@ paths:
                     type: string
                     description: Stock symbol
                     example: "AAPL"
-                    maxLength: 5  # ✅ Adicionado maxLength correto
+                    maxLength: 5
                   price:
-                    type: number  # ✅ Corrigido: agora é um número (sem maxLength)
+                    type: number
                     description: Current stock price
                     example: 150.75
                   currency:
                     type: string
                     description: Quote currency
                     example: "USD"
-                    maxLength: 3  # ✅ Adicionado maxLength correto
+                    maxLength: 3
         "400":
-          description: Invalid request (missing or incorrect stock symbol)
+          description: >
+            Invalid request. This may happen if the stock
+            symbol is missing or incorrect.

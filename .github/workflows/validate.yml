@@ -13,21 +13,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🛠️ Checkout do código
+      - name: 🛠️ Checkout the code
         uses: actions/checkout@v3
 
-      - name: 📄 Verificar formatação do YAML (YAML Lint)
+      - name: 📄 Check YAML Formatting (YAML Lint)
         uses: ibiqlik/action-yamllint@v3
         with:
-          file_or_dir: "spec/"  # Analisa todos os arquivos dentro da pasta spec
+          file_or_dir: "spec/"  # Analyzes all files inside the spec folder
 
-      - name: ⚡ Configurar Node.js
+      - name: ⚡ Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      - name: 📦 Instalar Spectral
+      - name: 📦 Install Spectral
         run: npm install -g @stoplight/spectral-cli
 
-      - name: 🔍 Validar Spec OpenAPI com Spectral
+      - name: 🔍 Validate OpenAPI Spec with Spectral
         run: spectral lint spec/financial-market-api.yaml --ruleset spec/spectral.yaml

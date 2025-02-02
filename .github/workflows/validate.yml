@@ -30,4 +30,4 @@ jobs:
         run: npm install -g @stoplight/spectral-cli
 
       - name: 🔍 Validar Spec OpenAPI com Spectral
-        run: spectral lint spec/api-financeira.yaml --ruleset spec/spectral-rules.yaml
+        run: spectral lint spec/financial-market-api.yaml --ruleset spec/spectral.yaml

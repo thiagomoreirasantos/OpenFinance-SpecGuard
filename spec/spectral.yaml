@@ -33,7 +33,9 @@ rules:
       No fields should allow null values. This rule prevents
       nullable fields to ensure data consistency.
     severity: "warn"
-    given: "$.paths[*][*].responses[*].content.application/json.schema.properties[*]"
+    given: >
+      $.paths[*][*].responses[*].content.application/json.schema.
+      properties[*]
     then:
       field: "nullable"
       function: falsy
@@ -43,7 +45,9 @@ rules:
       All string fields must have a maxLength defined to
       prevent excessively long inputs.
     severity: "error"
-    given: "$.paths[*][*].responses[*].content.application/json.schema.properties[*]"
+    given: >
+      $.paths[*][*].responses[*].content.application/json.schema.
+      properties[*]
     then:
       field: "maxLength"
       function: truthy

@@ -1,0 +1,18 @@
+name: "Spectral Validator"
+description: "Runs Spectral to validate OpenAPI specs automatically."
+author: "Thiago"
+
+inputs:
+  spec-file:
+    description: "Path to the OpenAPI spec file"
+    required: true
+    default: "spec/financial-market-api.yaml"
+
+  rules-file:
+    description: "Path to the Spectral rules file"
+    required: true
+    default: "spec/spectral-rules.yaml"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
